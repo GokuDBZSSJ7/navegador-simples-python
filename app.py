@@ -7,25 +7,20 @@ from PyQt6.QtGui import QPalette, QColor
 class Browser(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("GX Browser")
+        self.setWindowTitle("Browser")
         self.setGeometry(100, 100, 1200, 800)
         
-        # Aplicando tema futurista
         self.set_gx_theme()
         
-        # Criando o widget central
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         
-        # Layout principal
         self.layout = QVBoxLayout()
         self.central_widget.setLayout(self.layout)
         
-        # Barra de navegação
         self.navbar = QHBoxLayout()
         self.layout.addLayout(self.navbar)
         
-        # Botões de navegação estilizados
         self.back_btn = QPushButton("⬅")
         self.back_btn.clicked.connect(self.go_back)
         self.navbar.addWidget(self.back_btn)
@@ -38,29 +33,26 @@ class Browser(QMainWindow):
         self.reload_btn.clicked.connect(self.reload_page)
         self.navbar.addWidget(self.reload_btn)
         
-        # Campo de URL futurista
         self.url_bar = QLineEdit()
         self.url_bar.setPlaceholderText("Digite a URL ou pesquise no Google...")
         self.url_bar.returnPressed.connect(self.load_url)
         self.navbar.addWidget(self.url_bar)
         
-        # Visualizador Web
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("https://www.google.com"))
         self.layout.addWidget(self.browser)
         
-        # Aplicando estilos visuais
         self.apply_styles()
         
     def set_gx_theme(self):
         palette = QPalette()
-        palette.setColor(QPalette.ColorRole.Window, QColor(20, 20, 20))  # Fundo escuro
-        palette.setColor(QPalette.ColorRole.WindowText, QColor(200, 0, 200))  # Roxo neon
-        palette.setColor(QPalette.ColorRole.Base, QColor(30, 30, 30))  # Inputs escuros
-        palette.setColor(QPalette.ColorRole.Text, QColor(255, 0, 0))  # Vermelho neon
+        palette.setColor(QPalette.ColorRole.Window, QColor(20, 20, 20))  
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(200, 0, 200)) 
+        palette.setColor(QPalette.ColorRole.Base, QColor(30, 30, 30))  
+        palette.setColor(QPalette.ColorRole.Text, QColor(255, 0, 0))  
         palette.setColor(QPalette.ColorRole.Button, QColor(40, 40, 40))
         palette.setColor(QPalette.ColorRole.ButtonText, QColor(255, 255, 255))
-        palette.setColor(QPalette.ColorRole.Highlight, QColor(255, 0, 0))  # Destaque vermelho
+        palette.setColor(QPalette.ColorRole.Highlight, QColor(255, 0, 0)) 
         palette.setColor(QPalette.ColorRole.HighlightedText, QColor(255, 255, 255))
         
         self.setPalette(palette)
@@ -97,7 +89,7 @@ class Browser(QMainWindow):
     def load_url(self):
         url = self.url_bar.text().strip()
         if not url:
-            return  # Não faz nada se o campo estiver vazio
+            return  
         
         if "." in url or url.startswith("http"):
             if not url.startswith("http"):
